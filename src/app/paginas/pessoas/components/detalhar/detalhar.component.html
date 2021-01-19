@@ -1,0 +1,55 @@
+<button (click)="redirecionarHome()" class="btn">
+    Voltar
+</button>
+
+<div class="container d-flex flex-column">
+    <div class="row">
+        <div class="col-12 mb-5">
+            <h2>Histórico</h2>
+    
+            <label><strong>Nome:</strong> {{ historico?.nome }}</label><br>
+            <label><strong>Email:</strong> {{ historico?.email }}</label>
+        </div>
+      
+        <div class="col-6">
+          <h4>Comprovante de pagamento</h4>
+          <table class="table">
+            <thead>
+              <tr>
+                <th scope="col">Destinatario</th>
+                <th scope="col">Valor</th>
+                <th scope="col">Data</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor="let comprovante of historico?.pagador">
+                <td>{{ comprovante.nomeRecebedor }}</td>
+                <td>{{ comprovante.valor | monetario }}</td>
+                <td>{{ comprovante.data | date: 'dd/MM/yyyy h:mm a'}}</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      
+        <div class="col-6">
+          <h4>Comprovante de Recebimento</h4>
+          <table class="table">
+            <thead>
+              <tr>
+                <th scope="col">Remetente</th>
+                <th scope="col">Valor</th>
+                <th scope="col">Data</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor="let comprovante of historico?.recebedor">
+                <td>{{ comprovante.nomePagador }}</td>
+                <td>{{ comprovante.valor | monetario}}</td>
+                <td>{{ comprovante.data | date: 'dd/MM/yyyy h:mm a'}}</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+    </div>
+  
+</div>

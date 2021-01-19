@@ -1,0 +1,35 @@
+<button (click)="redirecionarHome()"  class="btn btn-secundary">Voltar</button>
+
+<div class="container">
+    <form [formGroup]="form" (submit)="enviarPagamento()" class="row g-3" >
+        <div class="col-md-5">
+            <label for="inputState" class="form-label"><strong>Remetente:</strong></label>
+            <select formControlName="idPagador" class="form-control">
+                <option value="">Selecione o Remetente</option>
+                <option *ngFor="let pessoa of pessoas" [value]="pessoa?.pessoa_id">{{pessoa?.nome}}</option>
+            </select>
+        </div>
+    
+        <div class="col-md-2">
+            <label for="inputZip" class="form-label"><strong>Quantia Monetária:</strong></label>
+            <input 
+            formControlName="valor"
+            type="text" 
+            currencyMask 
+            [options]="{ prefix: 'R$ ', thousands: '.', decimal: ',', allowZero: true, precision: 2 }" 
+            class="form-control" id="inputZip">
+        </div>
+    
+        <div class="col-md-5">
+            <label for="inputState" class="form-label"><strong>Destinatário:</strong></label>
+            <select formControlName="idRecebedor" class="form-control">
+                <option value="">Selecione o Destinatário</option>
+                <option *ngFor="let pessoa of pessoas" [value]="pessoa?.pessoa_id">{{pessoa?.nome}}</option>
+            </select>
+        </div>
+    
+        <div class="col-12 pt-4">
+            <button [disabled]="form.invalid" type="submit" class="col-12 btn btn-success">Enviar Pagamento</button>
+        </div>
+    </form>
+</div>
